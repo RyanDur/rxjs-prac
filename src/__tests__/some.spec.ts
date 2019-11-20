@@ -16,14 +16,23 @@ describe('something', () => {
     it('should ', (done) => {
       const actual: string[] = [];
       fiveResults$.subscribe({
-        next: val => val.subscribe({
-          next: v => actual.push(v)
-        }),
+        next: (value: string) => actual.push(value),
         complete: () => {
-          expect(actual).toEqual(['Result (0): 0']);
+          expect(actual).toEqual([
+            'Result (0): 0',
+            'Result (0): 1',
+            'Result (1): 0',
+            'Result (0): 2',
+            'Result (1): 1',
+            'Result (0): 3',
+            'Result (1): 2',
+            'Result (0): 4',
+            'Result (1): 3',
+            'Result (1): 4'
+          ]);
           done();
         }
       });
-    });
+    }, 10000);
   });
 });
